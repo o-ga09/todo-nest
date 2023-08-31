@@ -1,0 +1,55 @@
+name: CI
+  push:
+  pull_request:
+    branches: [main]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Node Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Frontend dependencies
+        run: |
+          cd frontend
+          npm install
+      
+      - name: Install Backend dependencies
+        run: |
+          cd backend
+          npm install
+      
+      - name: Frontend Static check
+        run: |
+          cd frontend
+          npm run lint
+          npm run lintfix
+          npm run format
+      
+      - name: Backend Static check
+        run: |
+          cd backend
+          npm run lint
+          npm run lintfix
+          npm run format
+
+      - name: Frontend Coverage Report
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          working-directory: "./frontend"
+          test-command: "npm run test:coverage"
+
+      - name: Backend Coverage Report
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          working-directory: "./backend"
+          test-command: "npm run test:cov"
