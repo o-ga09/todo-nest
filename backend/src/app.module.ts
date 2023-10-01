@@ -1,10 +1,20 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from './lib/handler/controller/app.controller';
+import { INPUTPORT, Usecase } from './lib/usecase/app.service';
+import { AppGateway } from './lib/gateway/app.gateway';
 
 @Module({
   imports: [],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: 'usecase',
+      useClass: Usecase,
+    },
+    {
+      provide: INPUTPORT,
+      useClass: AppGateway,
+    },
+  ],
 })
 export class AppModule {}
