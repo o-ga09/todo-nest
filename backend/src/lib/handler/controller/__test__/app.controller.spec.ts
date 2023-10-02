@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from '../app.controller';
 import { INPUTPORT, Usecase } from '../../../usecase/app.service';
-import { AppGateway } from '../../../gateway/app.gateway';
+import { Gateway, REPOSITORY } from '../../../gateway/app.gateway';
+import { RepositoryImpl } from '../../../driver/driver';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -16,7 +17,11 @@ describe('AppController', () => {
         },
         {
           provide: INPUTPORT,
-          useClass: AppGateway,
+          useClass: Gateway,
+        },
+        {
+          provide: REPOSITORY,
+          useClass: RepositoryImpl,
         },
       ],
     }).compile();

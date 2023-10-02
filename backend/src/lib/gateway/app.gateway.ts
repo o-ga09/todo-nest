@@ -1,23 +1,74 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Task, TaskId, RequestParam, ResponseStatus } from '../domain/entity';
 import { InputPort } from '../usecase/port/InputPort';
+import { Repository, RequestDriverTask } from './repository/repository';
+
+export const REPOSITORY = 'repository';
 
 @Injectable()
-export class AppGateway implements InputPort {
-  getAll(): Promise<Task[]> {
-    throw new Error('Method not implemented.');
+export class Gateway implements InputPort {
+  constructor(
+    @Inject(REPOSITORY)
+    readonly repository: Repository,
+  ) {}
+
+  async getAll(): Promise<Task[]> {
+    const res = await this.repository.getAll();
+    const tasks = res.map((task) => {
+      return new Task(
+        task.id,
+        task.taskName,
+        task.taskDesc,
+        task.taskStatus,
+        task.creadted_at,
+        task.updated_at,
+      );
+    });
+    return tasks;
   }
-  getById(id: TaskId): Promise<Task> {
-    throw new Error('Method not implemented.');
+  async getById(id: TaskId): Promise<Task> {
+    const taskId = id.Value;
+    const res = await this.repository.getById(taskId);
+    const task = new Task(
+      res.id,
+      res.taskName,
+      res.taskDesc,
+      res.taskStatus,
+      res.creadted_at,
+      res.updated_at,
+    );
+    return task;
   }
-  createTask(param: RequestParam): Promise<ResponseStatus> {
-    throw new Error('Method not implemented.');
+  async createTask(param: RequestParam): Promise<ResponseStatus> {
+    const task = new RequestDriverTask(
+      param.taskName.Value,
+      param.taskDesc.Value,
+      param.taskStatus.Value,
+      param.taskCreatedAt.Value,
+      param.taskUpdatedAt.Value,
+    );
+    const res = await this.repository.Create(task);
+    const status = new ResponseStatus(res.status, res.code);
+    return status;
   }
-  updateTask(id: TaskId, param: RequestParam): Promise<ResponseStatus> {
-    throw new Error('Method not implemented.');
+  async updateTask(id: TaskId, param: RequestParam): Promise<ResponseStatus> {
+    const taskId = id.Value;
+    const task = new RequestDriverTask(
+      param.taskName.Value,
+      param.taskDesc.Value,
+      param.taskStatus.Value,
+      param.taskCreatedAt.Value,
+      param.taskUpdatedAt.Value,
+    );
+    const res = await this.repository.Update(taskId, task);
+    const status = new ResponseStatus(res.status, res.code);
+    return status;
   }
-  deleteTask(id: TaskId): Promise<ResponseStatus> {
-    throw new Error('Method not implemented.');
+  async deleteTask(id: TaskId): Promise<ResponseStatus> {
+    const taskId = id.Value;
+    const res = await this.repository.Delete(taskId);
+    const status = new ResponseStatus(res.status, res.code);
+    return status;
   }
 }

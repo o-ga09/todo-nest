@@ -40,8 +40,17 @@ describe('タスクを作成する', () => {
     const mockResult = new ResponseStatus('Created', 200);
     createTaskMock.mockResolvedValueOnce(mockResult);
 
+    const mockCreatedAt = new Date(2023, 9, 2, 0, 0);
+    const mockUpdatedAt = new Date(2023, 9, 2, 0, 0);
+
     const usecase = new Usecase(inputPort);
-    const arg = new RequestParam('test', 'hoge', 0);
+    const arg = new RequestParam(
+      'test',
+      'hoge',
+      0,
+      mockCreatedAt,
+      mockUpdatedAt,
+    );
     const expected = await usecase.createTask(arg);
     expect(mockResult).toEqual(expected);
   });
@@ -55,8 +64,17 @@ describe('タスクを編集する', () => {
     const mockResult = new ResponseStatus('Updated', 200);
     updateTaskMock.mockResolvedValueOnce(mockResult);
 
+    const mockCreatedAt = new Date(2023, 9, 2, 0, 0);
+    const mockUpdatedAt = new Date(2023, 9, 2, 0, 0);
+
     const usecase = new Usecase(inputPort);
-    const arg = new RequestParam('test', 'hoge', 0);
+    const arg = new RequestParam(
+      'test',
+      'hoge',
+      0,
+      mockCreatedAt,
+      mockUpdatedAt,
+    );
     const expected = await usecase.updatedTask(1, arg);
     expect(mockResult).toEqual(expected);
   });
