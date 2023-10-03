@@ -2,7 +2,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Task, TaskId, RequestParam, ResponseStatus } from '../domain/entity';
 import { InputPort } from '../usecase/port/InputPort';
-import { Repository, RequestDriverTask } from './repository/repository';
+import { IRepository, RequestDriverTask } from './repository/repository';
 
 export const REPOSITORY = 'repository';
 
@@ -10,7 +10,7 @@ export const REPOSITORY = 'repository';
 export class Gateway implements InputPort {
   constructor(
     @Inject(REPOSITORY)
-    readonly repository: Repository,
+    readonly repository: IRepository,
   ) {}
 
   async getAll(): Promise<Task[]> {

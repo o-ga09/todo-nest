@@ -1,4 +1,4 @@
-export interface Repository {
+export interface IRepository {
   getAll(): Promise<DriverTask[]>;
   getById(id: number): Promise<DriverTask>;
   Create(task: RequestDriverTask): Promise<DriverResponse>;

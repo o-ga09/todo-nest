@@ -3,9 +3,10 @@ import { AppController } from './lib/handler/controller/app.controller';
 import { INPUTPORT, Usecase } from './lib/usecase/app.service';
 import { Gateway, REPOSITORY } from './lib/gateway/app.gateway';
 import { RepositoryImpl } from './lib/driver/driver';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [],
+  imports: [ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [
     {

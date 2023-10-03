@@ -8,12 +8,12 @@ import { Gateway } from '../app.gateway';
 import {
   DriverResponse,
   DriverTask,
-  Repository,
+  IRepository,
 } from '../repository/repository';
 
 describe('Gateway', () => {
   test('タスクの一覧を取得する', async () => {
-    const taskDriver = {} as Repository;
+    const taskDriver = {} as IRepository;
     const getAllMock = jest.fn();
     taskDriver.getAll = getAllMock;
     getAllMock.mockResolvedValueOnce([]);
@@ -27,7 +27,7 @@ describe('Gateway', () => {
 
 describe('タスクをIdで取得する', () => {
   test('任意の１つのタスクが返ること', async () => {
-    const taskDriver = {} as Repository;
+    const taskDriver = {} as IRepository;
     const getByIdMock = jest.fn();
     taskDriver.getById = getByIdMock;
 
@@ -45,7 +45,7 @@ describe('タスクをIdで取得する', () => {
 
 describe('タスクを作成する', () => {
   test('正常系 - 任意の１つのタスクが作成してOKが返ること', async () => {
-    const taskDriver = {} as Repository;
+    const taskDriver = {} as IRepository;
     const createTaskMock = jest.fn();
     taskDriver.Create = createTaskMock;
 
@@ -71,7 +71,7 @@ describe('タスクを作成する', () => {
 
 describe('タスクを編集する', () => {
   test('正常系 - 任意の１つのタスクが作成してOKが返ること', async () => {
-    const taskDriver = {} as Repository;
+    const taskDriver = {} as IRepository;
     const updateTaskMock = jest.fn();
     taskDriver.Update = updateTaskMock;
 
@@ -98,7 +98,7 @@ describe('タスクを編集する', () => {
 
 describe('タスクを削除する', () => {
   test('正常系 - 任意の１つのタスクが削除してOKが返ること', async () => {
-    const taskDriver = {} as Repository;
+    const taskDriver = {} as IRepository;
     const deleteTaskMock = jest.fn();
     taskDriver.Delete = deleteTaskMock;
 
