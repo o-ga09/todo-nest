@@ -52,5 +52,13 @@
     "transform": {
       "^.+\\.(t|j)sx?$": "@swc/jest"
     }
-  }
+  },
+  "coverageReporters": [
+    [
+      "text",
+      {
+        "file": "report.json"
+      }
+    ]
+  ]
 }
