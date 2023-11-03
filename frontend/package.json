@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "jest",
     "test:coverage": "npm run test -- --coverage --silent --testLocationInResults --ci --json --outputFile=\"report.json\"",
-    "lintfix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint -- --fix",
     "format": "eslint --cache --fix 'src/**/*.{js,jsx,ts,tsx}' && prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
