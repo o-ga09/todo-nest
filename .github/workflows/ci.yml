@@ -29,14 +29,13 @@ jobs:
         run: |
           cd frontend
           npm run lint
-          npm run lintfix
+          npm run lint:fix
           npm run format
 
       - name: Backend Static check
         run: |
           cd backend
           npm run lint
-          npm run lintfix
           npm run format
 
       - name: Frontend Coverage Report
