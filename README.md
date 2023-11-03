@@ -1,24 +1,30 @@
 # todo-nest
 
-## outline
+<img src="./doc/image.png">
+<div align="center">TodoアプリAPIをNest.jsでつくる</div>
 
-Todoアプリをバックエンド、フロントエンドともにTypescriptで作ってみる
-リポジトリ
+---
 
-## service architecture
+## backend service architecture
 
-- Backend
-  - NestJs
-- Frontend
-  - React + Vite
-- Hosting
-  - appwrite
-- deploy
-  - appwrite
-- DataBase
-  - PlanetScale
-- ORM
-  - prisma
+| スタック       | ツール名    |
+| -------------- | ----------- |
+| 言語           | typescript  |
+| ライブラリ     | typeORM     |
+| フレームワーク | NestJs      |
+| DB             | PlanetScale |
+| インフラ       | Cloud Run   |
+| テストツール   | Jest        |
+
+## frontend service architecture
+
+| スタック       | ツール名   |
+| -------------- | ---------- |
+| 言語           | typescript |
+| ライブラリ     | React      |
+| フレームワーク | Vite       |
+| ホスティング   | Firebase   |
+| テストツール   | Jest       |
 
 ## software architecture
 
