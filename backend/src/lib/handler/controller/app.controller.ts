@@ -10,6 +10,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { Usecase } from '../../usecase/app.service';
+import { ViewRequestParam } from './model/view';
 import { RequestParam } from 'src/lib/domain/entity';
 
 @Controller()
@@ -38,17 +39,31 @@ export class AppController {
   }
 
   @Post('todo')
-  async create(@Body() body: RequestParam): Promise<string> {
-    const res = await this.appService.createTask(body);
+  async create(@Body() body: ViewRequestParam): Promise<string> {
+    const param = new RequestParam(
+      body.taskName,
+      body.taskDesc,
+      body.taskStatus,
+      new Date(body.taskCreatedAt),
+      new Date(body.taskUpdatedAt),
+    );
+    const res = await this.appService.createTask(param);
     return JSON.stringify(res);
   }
 
   @Put('todo/:id')
   async update(
     @Param('id') id: string,
-    @Body() body: RequestParam,
+    @Body() body: ViewRequestParam,
   ): Promise<string> {
-    const res = await this.appService.updatedTask(Number(id), body);
+    const param = new RequestParam(
+      body.taskName,
+      body.taskDesc,
+      body.taskStatus,
+      new Date(body.taskCreatedAt),
+      new Date(body.taskUpdatedAt),
+    );
+    const res = await this.appService.updatedTask(Number(id), param);
     return JSON.stringify(res);
   }
 

@@ -42,11 +42,11 @@ export class Gateway implements InputPort {
   }
   async createTask(param: RequestParam): Promise<ResponseStatus> {
     const task = new RequestDriverTask(
-      param.taskName,
-      param.taskDesc,
-      param.taskStatus,
-      param.taskCreatedAt,
-      param.taskUpdatedAt,
+      param.taskName.Value,
+      param.taskDesc.Value,
+      param.taskStatus.Value,
+      param.taskCreatedAt.Value,
+      param.taskUpdatedAt.Value,
     );
     const res = await this.repository.Create(task);
     const status = new ResponseStatus(res.status, res.code);
@@ -55,11 +55,11 @@ export class Gateway implements InputPort {
   async updateTask(id: TaskId, param: RequestParam): Promise<ResponseStatus> {
     const taskId = id.Value;
     const task = new RequestDriverTask(
-      param.taskName,
-      param.taskDesc,
-      param.taskStatus,
-      param.taskCreatedAt,
-      param.taskUpdatedAt,
+      param.taskName.Value,
+      param.taskDesc.Value,
+      param.taskStatus.Value,
+      param.taskCreatedAt.Value,
+      param.taskUpdatedAt.Value,
     );
     const res = await this.repository.Update(taskId, task);
     const status = new ResponseStatus(res.status, res.code);
