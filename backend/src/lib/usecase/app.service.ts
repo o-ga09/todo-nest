@@ -11,7 +11,7 @@ export class Usecase {
   ) {}
 
   getHello(): string {
-    return 'Hello World!';
+    return 'OK';
   }
 
   async getAll(): Promise<Task[]> {

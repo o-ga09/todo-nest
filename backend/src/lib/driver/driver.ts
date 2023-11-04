@@ -9,29 +9,35 @@ import { Task } from './dao/dao.entity';
 export class RepositoryImpl implements IRepository {
   constructor(readonly repository: Repository<Task>) {}
   async getAll(): Promise<DriverTask[]> {
-    const res = await this.repository.find();
+    // const res = await this.repository.find();
+    const res = [new DriverTask(1, 'hoge', 'fuga', 1, new Date(), new Date())];
     const tasks = res.map((task) => {
       return new DriverTask(
         task.id,
-        task.name,
-        task.description,
-        task.status,
+        task.taskName,
+        task.taskDesc,
+        task.taskStatus,
         new Date(),
         new Date(),
       );
     });
     return tasks;
   }
-  getById(id: number): Promise<DriverTask> {
-    throw new Error(`Method not implemented.${id}`);
+  async getById(id: number): Promise<DriverTask> {
+    const res = new DriverTask(id, 'hoge', 'fuga', 1, new Date(), new Date());
+    return res;
   }
-  Create(task: DriverTask): Promise<DriverResponse> {
-    throw new Error(`Method not implemented.${task}`);
+  async Create(task: DriverTask): Promise<DriverResponse> {
+    const res = new DriverResponse('OK', task.id);
+    return res;
   }
-  Update(id: number, task: DriverTask): Promise<DriverResponse> {
-    throw new Error(`Method not implemented.${id},${task}`);
+  async Update(id: number, task: DriverTask): Promise<DriverResponse> {
+    const res = new DriverResponse('OK', id);
+    console.log(task);
+    return res;
   }
-  Delete(id: number): Promise<DriverResponse> {
-    throw new Error(`Method not implemented.${id}`);
+  async Delete(id: number): Promise<DriverResponse> {
+    const res = new DriverResponse('OK', id);
+    return res;
   }
 }

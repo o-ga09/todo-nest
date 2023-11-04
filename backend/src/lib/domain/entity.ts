@@ -128,23 +128,11 @@ export class ResponseStatus {
 }
 
 export class RequestParam {
-  readonly taskName: TaskName;
-  readonly taskDesc: TaskDesc;
-  readonly taskStatus: TaskStatus;
-  readonly taskCreatedAt: TaskCreatedAt;
-  readonly taskUpdatedAt: TaskUpdatedAt;
-
   constructor(
-    name: string,
-    desc: string,
-    status: number,
-    createdAt: Date,
-    updatedAt: Date,
-  ) {
-    this.taskName = new TaskName(name);
-    this.taskDesc = new TaskDesc(desc);
-    this.taskStatus = new TaskStatus(status);
-    this.taskCreatedAt = new TaskCreatedAt(createdAt);
-    this.taskUpdatedAt = new TaskUpdatedAt(updatedAt);
-  }
+    readonly taskName: string,
+    readonly taskDesc: string,
+    readonly taskStatus: number,
+    readonly taskCreatedAt: Date,
+    readonly taskUpdatedAt: Date,
+  ) {}
 }
